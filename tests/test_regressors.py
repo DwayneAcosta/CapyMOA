@@ -66,13 +66,13 @@ def test_regressor(learner_constructor, rmse, win_rmse):
         win_evaluator.update(instance.y_value, prediction)
         learner.train(instance)
 
-
-    actual_rmse = evaluator.RMSE()
-    actual_win_rmse = win_evaluator.RMSE()['windowed RMSE'][-1]
+    actual_rmse = evaluator.rmse()
+    actual_win_rmse = win_evaluator.rmse()[-1]
     assert actual_rmse == pytest.approx(rmse, abs=0.1), \
         f"Basic Eval: Expected {rmse:0.1f} RMSE got {actual_rmse: 0.1f} RMSE"
     assert actual_win_rmse == pytest.approx(win_rmse, abs=0.1), \
         f"Windowed Eval: Expected {win_rmse:0.1f} RMSE got {actual_win_rmse:0.1f} RMSE"
+
 
 def test_none_predict():
     """Test that a prediction of None is handled."""
